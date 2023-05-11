@@ -6,7 +6,7 @@ The master control program for dynamics, in the form of a Unix Shell Script, is 
 
 progdynstarterHP takes as input files:
 
-    freqinHP          - This is the standard output from a Gaussian 98, 03, 09, or 16 frequency calculation using freq=hpmodes.   For isotopically labeled compounds, use freq=(hpmodes,readisotopes). 
+    freqinHP - This is the standard output from a Gaussian 98, 03, 09, or 16 frequency calculation using freq=hpmodes.   For isotopically labeled compounds, use freq=(hpmodes,readisotopes). 
 
     progdyn.conf – This is a file giving a variety of configuration options, called on by many of the subprograms.  progdyn.conf examples are listed below and contains explanations of the program options. 
 
@@ -24,7 +24,7 @@ progdynstarterHP takes as input files:
 
 progdynstarterHP calls the following programs:
 
-proggenHP     - An awk program that starts a trajectory, giving each mode its zero point energy (if a quasiclassical calculation) plus random additional excitations depending on the temperature. Because proggenHP calls two python 3 programs, the local environment has to be set up in whatever way will get the python calls to work. 
+proggenHP - An awk program that starts a trajectory, giving each mode its zero point energy (if a quasiclassical calculation) plus random additional excitations depending on the temperature. Because proggenHP calls two python 3 programs, the local environment has to be set up in whatever way will get the python calls to work. 
 
 prog1stpoint – Awk program that creates the first Gaussian input file for each run
 
@@ -37,7 +37,6 @@ proganal – A program to analyze the latest point and see if a run is done.  Th
 progcfour – A control script to run CFOUR calculations (not needed for most kinds of runs, not used or listed here). 
 
  
-
 proggenHP calls three python 3 programs:
 
 randgen.py – A python program that generates random numbers between 0 and 1.  These are generated all at once and stored in a temporary file for use by proggenHP.
@@ -91,15 +90,15 @@ progdyn.conf is the main file where you set options for the trajectory run, and 
 
 Some of the early lines of progdynstarterHP need modified to  tell the program where to find gaussian, randgen, freqinHP, and all of the program files, along with the initialization of gaussian.  Modify these lines as needed.
 
-echo $1
-scratchdir=$1
-export g09root=/software/lms/g09_D01
-. $g09root/g09/bsd/g09.profile
-origdir=`pwd`
-cd $origdir
-logfile=docslog
-randdir=~/bin
-proggramdir=~/binall
-freqfile=~/binall/freqinHP
+    echo $1
+    scratchdir=$1
+    export g09root=/software/lms/g09_D01
+    . $g09root/g09/bsd/g09.profile
+    origdir=`pwd`
+    cd $origdir
+    logfile=docslog
+    randdir=~/bin
+    proggramdir=~/binall
+    freqfile=~/binall/freqinHP
 
 call progdynstarterHP from a queue job submission file, and I usually set things up so that I pass the location of gaussian scratch files from the job submission script to progdynstarterHP as a $1 parameter
